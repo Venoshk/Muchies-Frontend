@@ -4,7 +4,7 @@ import { Context } from '../context/Provider'
 import { fetchProducts } from '../../api/fetchProducts'
 import Loading from '../Loading/Loading'
 
-export const Menu = () => {
+export const Menu = ({type}) => {
     const { products, setProducts, loading, setLoading } = useContext(Context);
     const [error, setError] = useState(null);
 
@@ -14,9 +14,9 @@ export const Menu = () => {
             setProducts({});
 
             try {
-                const res = await fetchProducts();
+                const res = await fetchProducts(type);
                 console.log(res)
-                setProducts(res.productsWithImageUrl);
+                setProducts(res.products);
                 setError(null); // Limpa o erro em caso de sucesso
             } catch (error) {
                 console.error('Erro ao buscar produtos:', error);
@@ -27,7 +27,7 @@ export const Menu = () => {
         }
         
         loadProducts();
-    }, [ setProducts, setLoading]);
+    }, [type, setProducts, setLoading]);
 
     return (
         <>
@@ -35,7 +35,18 @@ export const Menu = () => {
             {loading ? (
                 <Loading />
             ) : (
-                <div className='menu '>
+                
+                <div className='menu flex flex-col items-center'>
+
+                    <div className='text-center font-bold text-3xl mb-5 mt-5 w-3/4'>
+                        {type ? (
+                            <h2>Cardapio de <span className='text-red-600'>{type}</span></h2>
+                        ) : 
+                            <h2>Nossos melhores <span className='text-red-600'>lanches</span></h2>}
+                    </div>
+                   
+                   
+
                     <div className='px-2 grid gap-4 mb-20  grid-cols-1 md:grid-cols-2'>
                         {Object.keys(products).map((product) => (
                             <Products key={product} data={products[product]} />

@@ -35,12 +35,12 @@ header span{
 }
 
 
-header.open {
+header .open {
   background-color: green;
   color: white;
 }
 
-header.closed {
+header .closed {
   background-color: red;
   color: white;
 }

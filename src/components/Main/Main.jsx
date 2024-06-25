@@ -4,8 +4,11 @@ import { Sidebar } from '../Nav/Sidebar';
 import { Provider } from '../context/Provider';
 import { Header } from '../Header/Header';
 import { Home } from '../../Router/Home';
+import { Hamburgueres } from '../../Router/Hamburgueres';
 import { ToastContainer, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Pizzas } from '../../Router/Pizzas';
+import { Hotdogs } from '../../Router/Hotdogs';
 
 export const Main = () => {
   return (
@@ -14,9 +17,12 @@ export const Main = () => {
         <Router>
           <Header />
           <Sidebar />
-          <h2 className='text-center mt-4 text-2xl font-bold mb-8'>Nossos melhores lanches</h2>
+          
           <Routes>
             <Route path='/' exact element={<Home />} />
+            <Route path='/hamburguer' exact element={<Hamburgueres />} />
+            <Route path='/pizza' exact element={<Pizzas />} />
+            <Route path='/hotdog' exact element={<Hotdogs />} />
           </Routes>
         </Router>
         <ToastContainer

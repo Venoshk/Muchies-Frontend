@@ -3,6 +3,6 @@ import { Menu } from '../components/Menu/Menu'
 
 export const Hamburgueres = () => {
     
-  return <Menu/>
+  return <Menu type={'hamburguer'}/>
 
 }

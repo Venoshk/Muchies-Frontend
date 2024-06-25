@@ -1,8 +1,8 @@
 function truncateText(text, ) {
-    if (text.length <= 100) {
+    if (text.length <= 80) {
         return text;
     } else {
-        return text.slice(0, 100) + "...";
+        return text.slice(0, 80) + "...";
     }
 }
 

@@ -6,6 +6,7 @@ import { TbFaceIdError } from "react-icons/tb";
 import { Context } from "../context/Provider";
 import { toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import truncateText from '../../utils/truncateText';
 
 export const Products = ({ data }) => {
   const { name, price, description, imageUrl } = data;
@@ -43,17 +44,13 @@ export const Products = ({ data }) => {
 
   return (
     <div className="flex items-center gap-2 w-full">
-<img className="w-28 h-28 rounded hover:scale-110 hover:rotate-6 duration-200" 
-     src={imageUrl } 
-     alt={name}/>
-      
-
-      <div>
-        <h3 className="font-bold mb-1">{name}</h3>
-        <p className="text-xs mb-2">{description}</p>
+        <img className="w-28 h-28 rounded hover:scale-110 hover:rotate-6 duration-200" src={imageUrl || ImageErro } alt={name}/>
+        <div>
+          <h3 className="font-bold mb-1">{name}</h3>
+          <p className="text-xs mb-2">{truncateText(description)}</p>
+          
         <div className="flex justify-between items-center">
           <span className="font-bold">{formateCurrency(price, 'BRL')}</span>
-
           <button className="text-2xl bg-black/25 py-1 px-2 rounded-md" onClick={handleAddCart}>
             <FaShoppingCart />
           </button>
@@ -62,3 +59,6 @@ export const Products = ({ data }) => {
     </div>
   );
 };
+
+
+
