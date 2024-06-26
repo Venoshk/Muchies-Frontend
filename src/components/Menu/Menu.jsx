@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Products } from '../Products/Products'
-import { Context } from '../context/Provider'
-import { fetchProducts } from '../../api/fetchProducts'
-import Loading from '../Loading/Loading'
+import React, { useContext, useEffect, useState } from 'react';
+import { Products } from '../Products/Products';
+import { Context } from '../context/Provider';
+import { fetchProducts } from '../../api/fetchProducts';
+import Loading from '../Loading/Loading';
+import { Header } from '../Header/Header';
+import { Sidebar } from '../Nav/Sidebar';
 
-export const Menu = ({type}) => {
+export const Menu = ({ type }) => {
     const { products, setProducts, loading, setLoading } = useContext(Context);
     const [error, setError] = useState(null);
 
@@ -15,8 +17,7 @@ export const Menu = ({type}) => {
 
             try {
                 const res = await fetchProducts(type);
-                console.log(res)
-                setProducts(res.products);
+                setProducts(res.products );
                 setError(null); // Limpa o erro em caso de sucesso
             } catch (error) {
                 console.error('Erro ao buscar produtos:', error);
@@ -24,36 +25,37 @@ export const Menu = ({type}) => {
             } finally {
                 setLoading(false);
             }
-        }
-        
+        };
+
         loadProducts();
     }, [type, setProducts, setLoading]);
 
     return (
+        
         <>
-            {error && <div className="error-message">{error}</div>}
-            {loading ? (
-                <Loading />
-            ) : (
-                
-                <div className='menu flex flex-col items-center'>
-
-                    <div className='text-center font-bold text-3xl mb-5 mt-5 w-3/4'>
-                        {type ? (
-                            <h2>Cardapio de <span className='text-red-600'>{type}</span></h2>
+        <Header/>
+        <Sidebar/>
+          {loading ? (
+            <Loading />
+          ) : (
+            <div className='menu mb-10 w-full flex flex-col items-center '>
+            
+                <div className='w-3/6 text-center'>
+                    { type ? (
+                        <h2 className='font-bold text-3xl mb-5 mt-5 '>Cardapio de <span className='text-red-600'>{type}</span></h2>
                         ) : 
-                            <h2>Nossos melhores <span className='text-red-600'>lanches</span></h2>}
-                    </div>
-                   
-                   
-
-                    <div className='px-2 grid gap-4 mb-20  grid-cols-1 md:grid-cols-2'>
-                        {Object.keys(products).map((product) => (
-                            <Products key={product} data={products[product]} />
-                        ))}
-                    </div>
+                        (<h2 className='font-bold text-3xl mb-5 mt-5'>Nossos <span className='text-red-600'>cardapios</span></h2>)
+                    }
                 </div>
-            )}
+              
+
+              <div className='px-4 flex-col gap-10 mb-20 grid grid-cols-1 md:grid-cols-2 w-full'>
+                {Object.keys(products).map((product => (
+                  <Products key={product} data={products[product]}/>
+                )))}
+              </div>
+            </div>
+          )}
         </>
-    )
-}
+    );
+};

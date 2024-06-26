@@ -44,7 +44,7 @@ export const Products = ({ data }) => {
 
   return (
     <div className="flex items-center gap-2 w-full">
-        <img className="w-28 h-28 rounded hover:scale-110 hover:rotate-6 duration-200" src={imageUrl || ImageErro } alt={name}/>
+        <img className="w-28 h-28 rounded hover:scale-110 hover:rotate-6 duration-200" src={imageUrl} alt={name}/>
         <div>
           <h3 className="font-bold mb-1">{name}</h3>
           <p className="text-xs mb-2">{truncateText(description)}</p>

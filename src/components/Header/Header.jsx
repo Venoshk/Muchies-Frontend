@@ -11,7 +11,7 @@ export const Header = () => {
   useEffect(() => {
     const checkRestaurantOpen = () => {
       const now = new Date();
-      const hours = now.getHours();
+      const hours = 20;
       if (hours >= 18 && hours <= 22) {
         setIsOpen(!false);
       } else {

@@ -1,29 +1,49 @@
-import React, { useContext } from 'react'
+import  { useContext } from 'react'
 import { Context } from '../context/Provider'
-import './Cart.css'
+import './Cart.css';
 import { CartItem } from '../CartItem/CartItem';
 import formateCurrency from '../../utils/formateCurrency';
 import { GrClose } from "react-icons/gr";
+import { Link } from 'react-router-dom';
+import { AlertCard } from '../AlertCard/AlertCard';
 export const Cart = () => {
 
-    const {cartItems, setCartItems, isCartVisible, setIsCartVisible} = useContext(Context)
+    const {cartItems, isCartVisible, setIsCartVisible} = useContext(Context)
 
     const totalPrice = cartItems.reduce((total, item) => total + (item.price * item.qualify), 0);
-
+    
   return (
     <div className={`cart ${isCartVisible ? 'cart--active' : ''}`}>
       <div className='flex items-center justify-between flex-row mt-10'>
-        <h2 className='text-white text-center text-2xl'>Carrinho</h2>
-        <button onClick={() => setIsCartVisible(!isCartVisible)}>
-            <GrClose/>
-        </button>
+          <h2 className='text-white text-center text-2xl'>Carrinho</h2>
+          <button onClick={() => setIsCartVisible(!isCartVisible)} className='text-3xl hover:text-red-600'>
+              <GrClose/>
+          </button>
       </div>
 
-      <div className='mt-10'>
-        {cartItems.map((item) => <CartItem key={item.id} data={item}/>)}
-      </div>      
+    <div className=''>
+      {cartItems.length === 0 ? (
+        <AlertCard title='Seu carrinho está vazio' message='Coloque o seu melhor lanche aqui!'/>
+      ) : (
+        <div className='mt-10 overflow-auto'>
+          {cartItems.map((item) => <CartItem key={item.id} data={item}/>)}
+        </div> 
+      )}
+    </div>
+    
+           
+
+        <div className='bg-slate-900/45 absolute bottom-0 left-0 w-full'>
         
-      <p className='font-bold text-2xl absolute bottom-10 w-full border'>Total a pagar: <span className='text-red-600 bg-transparent'>{formateCurrency(totalPrice, 'BRL')}</span></p>
+        <Link to={'/formulario'}>
+          <button className='text-2xl font-bold px-5 py-7 w-full flex justify-between' onClick={() => setIsCartVisible(!isCartVisible)}>
+              Avança 
+              <p className='text-red-600 font-bold text-2xl'>Total: {formateCurrency(totalPrice, 'BRL')}</p>
+            </button>
+        </Link>
+          
+          
+        </div>
     </div>
   )
 }
