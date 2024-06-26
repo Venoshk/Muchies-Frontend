@@ -33,11 +33,11 @@ export const Cart = () => {
     
            
 
-        <div className='bg-slate-900/45 absolute bottom-0 left-0 w-full'>
+        <div className={`bg-white/5 absolute px-2 bottom-0 left-0 w-full  ${cartItems.length === 0 ? 'hidden' : ''}`}>
         
         <Link to={'/formulario'}>
           <button className='text-2xl font-bold px-5 py-7 w-full flex justify-between' onClick={() => setIsCartVisible(!isCartVisible)}>
-              Avança 
+              Finalizar 
               <p className='text-red-600 font-bold text-2xl'>Total: {formateCurrency(totalPrice, 'BRL')}</p>
             </button>
         </Link>

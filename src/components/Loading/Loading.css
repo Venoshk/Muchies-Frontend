@@ -1,19 +1,6 @@
-.loading {
+.loader {
     font-size: 2rem;
     margin: 100px auto 200px;
-    animation: spin 1s linear infinite;
     width: 100%;
-    color: red;
-    overflow: hidden;
     
-  }
-  
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-  
-    to {
-      transform: rotate(360deg);
-    }
   }

@@ -43,6 +43,7 @@ export const Products = ({ data }) => {
   };
 
   return (
+    
     <div className="flex items-center gap-2 w-full">
         <img className="w-28 h-28 rounded hover:scale-110 hover:rotate-6 duration-200" src={imageUrl} alt={name}/>
         <div>
@@ -51,7 +52,7 @@ export const Products = ({ data }) => {
           
         <div className="flex justify-between items-center">
           <span className="font-bold">{formateCurrency(price, 'BRL')}</span>
-          <button className="text-2xl bg-black/25 py-1 px-2 rounded-md" onClick={handleAddCart}>
+          <button className="text-2xl bg-black/10 py-1 px-2 rounded-md hover:text-red-600 hover:bg-black/20 transition-colors" onClick={handleAddCart}>
             <FaShoppingCart />
           </button>
         </div>
